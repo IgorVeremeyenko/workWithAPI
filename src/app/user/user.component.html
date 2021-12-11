@@ -1,0 +1,18 @@
+<div>Id: {{user.id}}</div>
+<div>Name: {{user.name}}</div>
+<div>Email: {{user.email}}</div>
+<div>Gender: {{user.gender}}</div>
+<div>Status: {{user.status}}</div>
+
+<div>
+  <h3>Posts:</h3>
+  <ul *ngIf="userPosts.length != 0 else noPosts">
+    <li *ngFor="let post of userPosts">
+      <h4>{{post.title}}</h4>
+      <div>{{post.body}}</div>
+    </li>
+  </ul>
+</div>
+<ng-template #noPosts>
+  <h5>No posts</h5>
+</ng-template>

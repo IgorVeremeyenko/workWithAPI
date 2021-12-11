@@ -1,0 +1,27 @@
+<div>
+  <h3>Page: {{page}}</h3>
+  <button (click)="previousPageClick()" [disabled]="!canGoPrevious()">Prev</button>
+  <button (click)="nextPageClick()"[disabled]="!canGoNext()">Next</button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.gender}}</td>
+      <td>{{user.status}}</td>
+      <td><button (click)="userDetails(user.id)">Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
