@@ -54,6 +54,10 @@ export class UsersComponent implements OnInit {
     this.router.navigateByUrl(`/user/${id}`);
   }
 
+  addUser() {
+    this.router.navigateByUrl('add-user')
+  }
+
   loadUsers() {
     this.usersService.getUsers(this.page)
       .subscribe((res: any) => {

@@ -1,0 +1,60 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<form class="example-form" #f="ngForm" (ngSubmit)="onSubmit(f)" [formGroup]="form">
+    <h3>Добавление нового пользователя</h3>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Имя</mat-label>
+                    <input matInput formControlName="name" [disabled]="isLoading">
+                    <mat-error *ngIf="f.hasError('required')">
+                        Имя <strong>обязательно</strong>
+                    </mat-error>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" [disabled]="isLoading" placeholder="Ex. pat@example.com">
+                    <mat-error *ngIf="f.hasError('pattern') && f.touched">
+                        Пожалуйста, введите корректный почтовый адрес
+                    </mat-error>
+                    <mat-error *ngIf="f.hasError('required')">
+                        Почта <strong>обязательна</strong>
+                    </mat-error>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+    <mat-divider></mat-divider>
+    <div class="radioGroups">
+        <div>
+
+            <label id="example-radio-group-label">Укажите пол: </label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                [ngModelOptions]="{standalone: true}" [(ngModel)]="gender" formControlName="gender">
+                <mat-radio-button class="example-radio-button" [disabled]="isLoading" *ngFor="let gender of genders" [value]="gender"
+                    (change)="radioChange($event)"
+                    
+                    >
+                    {{gender}}
+                </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="f.hasError('required')">Вы должны выбрать что-то</mat-error>  
+        </div>
+        <div>
+            <h4>Укажите статус</h4>
+            <mat-form-field appearance="fill">
+                <mat-label>Выберите одно</mat-label>
+                <mat-select (selectionChange)="onChange($event.value)" formControlName="status" required>
+                    <mat-option [disabled]="isLoading" >Очистить</mat-option>
+                    <mat-option [disabled]="isLoading" (change)="onChange($event)" value="active">Правда</mat-option>
+                    <mat-option [disabled]="isLoading" value="passive">Ложь</mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.hasError('required')">Вы должны выбрать что-то</mat-error>                
+                
+            </mat-form-field>
+        </div>
+    </div>
+    <button mat-raised-button type="submit" [disabled]="isLoading">Подтвердить</button>
+</form>

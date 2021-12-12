@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable, tap, of} from "rxjs";
 import * as CryptoJS from "crypto-js"
+import { UserModel } from '../models/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -80,5 +81,10 @@ export class UsersService {
       }          
     }
     ));
+  }
+
+  addUser(user: UserModel){
+    
+    return this.http.post<UserModel>(this.url + '/users', user);
   }
 }

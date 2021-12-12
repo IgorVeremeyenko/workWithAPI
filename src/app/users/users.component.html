@@ -1,7 +1,11 @@
 <div>
+  <mat-divider></mat-divider>
+  <button mat-raised-button color="warn" style="margin: 10px;" (click)="addUser()">Add user</button>
+  <mat-divider></mat-divider>
   <h3>Page: {{page}}</h3>
-  <button (click)="previousPageClick()" [disabled]="!canGoPrevious()">Prev</button>
-  <button (click)="nextPageClick()"[disabled]="!canGoNext()">Next</button>
+  <button mat-raised-button (click)="previousPageClick()" [disabled]="!canGoPrevious()">Prev</button>
+  <button mat-raised-button (click)="nextPageClick()"[disabled]="!canGoNext()">Next</button>
+  <mat-divider></mat-divider>
   <table class="table">
     <thead>
     <tr>
@@ -19,7 +23,7 @@
       <td>{{user.email}}</td>
       <td>{{user.gender}}</td>
       <td>{{user.status}}</td>
-      <td><button (click)="userDetails(user.id)">Details</button></td>
+      <td><button mat-raised-button color="accent" (click)="userDetails(user.id)">Details</button></td>
     </tr>
     </tbody>
   </table>
