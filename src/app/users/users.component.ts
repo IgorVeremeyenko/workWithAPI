@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../services/users.service";
 import {UserModel} from "../models/UserModel";
-import {Router} from "@angular/router";
+import {NavigationStart, Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -16,13 +16,19 @@ export class UsersComponent implements OnInit {
 
   maxPages!: number;
 
-  constructor(private readonly usersService: UsersService, private readonly router: Router) { }
+  constructor(
+    private readonly usersService: UsersService, 
+    private readonly router: Router
+    ) {
+     
+     }
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.page = this.usersService.pages
+    this.loadUsers()
   }
 
-  canGoPrevious(): boolean {
+  canGoPrevious(): boolean {   
     return !(this.page <= 1);
   }
 
@@ -51,6 +57,7 @@ export class UsersComponent implements OnInit {
   loadUsers() {
     this.usersService.getUsers(this.page)
       .subscribe((res: any) => {
+        this.usersService.pages = this.page
         this.maxPages = res.meta.pagination.pages;
         this.users = res.data;
       })

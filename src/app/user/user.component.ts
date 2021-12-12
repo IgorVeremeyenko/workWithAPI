@@ -14,9 +14,12 @@ export class UserComponent implements OnInit {
   user!: UserModel;
   userPosts: PostModel[] = [];
 
-  constructor(private readonly activatedRoute: ActivatedRoute, private readonly userService: UsersService) { }
+  constructor(
+    private readonly activatedRoute: ActivatedRoute, 
+    private readonly userService: UsersService
+    ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.loadUser();
   }
 
@@ -43,5 +46,6 @@ export class UserComponent implements OnInit {
   getUserId(): string | null {
     return this.activatedRoute.snapshot.paramMap.get('id');
   }
+
 
 }
